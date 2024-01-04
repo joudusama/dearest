@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are We Getting Married?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: black; /* Set background color to black */
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #e44d26;
+            margin-top: 40vh; /* Center question on the screen */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #yesButton {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #e44d26;
+            color: white;
+            position: relative;
+        }
+
+        .emoji {
+            position: absolute;
+            pointer-events: none;
+            font-size: 3em;
+            animation: float 5s infinite; /* Add animation for floating effect */
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-50px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Are We Getting Married?</h1>
+
+    <div class="button-container">
+        <button id="yesButton" onclick="celebrate('yes')">Yes</button>
+        <button id="noButton" onclick="runAway()">No</button>
+    </div>
+
+    <script>
+        function changeAnswer(answer) {
+            var yesButton = document.getElementById("yesButton");
+            var noButton = document.getElementById("noButton");
+
+            yesButton.innerHTML = "Yes";
+            yesButton.style.backgroundColor = "#4caf50";  // Reset color
+
+            noButton.innerHTML = "Yes";
+            noButton.style.backgroundColor = "#4caf50";  // Reset color
+        }
+
+        function runAway() {
+            var noButton = document.getElementById("noButton");
+            var bodyWidth = window.innerWidth;
+            var bodyHeight = window.innerHeight;
+
+            var newX = Math.floor(Math.random() * (bodyWidth - noButton.clientWidth));
+            var newY = Math.floor(Math.random() * (bodyHeight - noButton.clientHeight));
+
+            noButton.style.left = newX + "px";
+            noButton.style.top = newY + "px";
+        }
+
+        function celebrate(answer) {
+            if (answer === 'yes') {
+                createEmojis();
+                createRings();
+                playMusic(); // Add a function to play background music
+            }
+        }
+
+        function createEmojis() {
+            var emojis = ['💑', '👰', '🤵', '❤️', '💖', '💍', '💐', '🎉', '🍰'];
+            var emojiContainer = document.body;
+
+            for (let i = 0; i < 100; i++) {
+                emojis.forEach(function (emoji) {
+                    var newEmoji = document.createElement('div');
+                    newEmoji.innerHTML = emoji;
+                    newEmoji.className = 'emoji';
+                    newEmoji.style.left = Math.floor(Math.random() * (window.innerWidth - 50)) + 'px';
+                    newEmoji.style.top = Math.floor(Math.random() * (window.innerHeight - 50)) + 'px';
+                    emojiContainer.appendChild(newEmoji);
+                });
+            }
+        }
+
+        function createRings() {
+            var rings = ['💍', '💍', '💍'];
+            var ringContainer = document.body;
+
+            rings.forEach(function (ring) {
+                var newRing = document.createElement('div');
+                newRing.innerHTML = ring;
+                newRing.className = 'emoji';
+                newRing.style.left = Math.floor(Math.random() * (window.innerWidth - 50)) + 'px';
+                newRing.style.top = Math.floor(Math.random() * (window.innerHeight - 50)) + 'px';
+                newRing.style.fontSize = '3em';
+                ringContainer.appendChild(newRing);
+            });
+        }
+
+        function playMusic() {
+            var audio = new Audio('your_music_file.mp3'); // Replace 'your_music_file.mp3' with your audio file
+            audio.loop = true; // Loop the audio
+            audio.play().then(_ => {}).catch(error => {
+                console.error('Error playing audio:', error);
+            });
+        }
+    </script>
+</body>
+</html>
